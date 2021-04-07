@@ -12,9 +12,10 @@ import {
     Switch
 } from "react-router-dom";
 import LoginForm from "./components/LoginForm";
+import reducer from "./reducer";
 
 const store = createStore(
-    state => state
+    reducer
 );
 const createHistory = createBrowserHistory();
 const history = createHistory

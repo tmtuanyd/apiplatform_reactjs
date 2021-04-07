@@ -12,7 +12,7 @@ class BlogPostList extends Component {
             <div>
                 <ul>
                     {
-                        posts && posts.map(post => <li>{post.title}</li>)
+                        posts && posts.map(post => <li key={post.id}>{post.title}</li>)
                     }
                 </ul>
             </div>
