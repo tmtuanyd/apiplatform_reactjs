@@ -1,27 +1,21 @@
 import React, {Component} from 'react';
 import BlogPostList from "./BlogPostList";
-import {blogPostAdd, blogPostList} from "../actions/action";
+import {blogPostAdd, blogPostListFetch, blogPostListRequest} from "../actions/action";
 import {connect} from "react-redux";
 import {BASE_URL} from "../Constants";
-import axios from "axios";
+
 
 class BlogPostContainer extends Component {
-    constructor(props) {
-        super(props);
-    }
     componentDidMount() {
         setTimeout(this.props.blogPostAdd, 1000)
-        this.props.blogPostList()
-        axios.get(BASE_URL+'/api/blog_posts')
-            .then(res=>console.log(res))
-            .catch(err=>console.log(err))
+        this.props.blogPostListFetch()
     }
 
     render() {
         console.log(BASE_URL)
         return (
             <div>
-                <BlogPostList posts={this.props.posts}/>
+                <BlogPostList posts={this.props.posts} isFetching={this.props.isFetching}/>
             </div>
         );
     }
@@ -32,8 +26,9 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = {
-    blogPostList,
-    blogPostAdd
+    blogPostList: blogPostListRequest,
+    blogPostAdd,
+    blogPostListFetch
 }
 
 export default connect(mapStateToProps, mapDispatchToProps) (BlogPostContainer);

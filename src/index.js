@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './components/App';
 import reportWebVitals from './reportWebVitals';
-import {createStore} from "redux";
+import {applyMiddleware, createStore} from "redux";
 import { createBrowserHistory } from "history";
 import {Provider} from "react-redux";
 import {
@@ -13,9 +13,10 @@ import {
 } from "react-router-dom";
 import LoginForm from "./components/LoginForm";
 import reducer from "./reducer";
+import thunk from "redux-thunk";
 
 const store = createStore(
-    reducer
+    reducer, applyMiddleware(thunk)
 );
 const createHistory = createBrowserHistory();
 const history = createHistory
