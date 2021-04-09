@@ -6,6 +6,7 @@ import Header from "./Header";
 import BlogDetail from "./BlogDetail";
 
 function App() {
+
   return (
       <div>
           <Header/>

@@ -14,9 +14,10 @@ import {
 import LoginForm from "./components/LoginForm";
 import reducer from "./reducer";
 import thunk from "redux-thunk";
+import {tokenMiddleware} from "./middleware";
 
 const store = createStore(
-    reducer, applyMiddleware(thunk)
+    reducer, applyMiddleware(thunk, tokenMiddleware)
 );
 const createHistory = createBrowserHistory();
 const history = createHistory

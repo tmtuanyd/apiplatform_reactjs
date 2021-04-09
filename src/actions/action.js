@@ -1,5 +1,5 @@
 import axios from "axios";
-import {BASE_URL} from "../Constants";
+import {BASE_URL, USER_LOGIN_SUCCESS} from "../Constants";
 
 export const BLOG_POST_LIST_REQUEST = 'BLOG_POST_LIST_REQUEST';
 export const BLOG_POST_LIST_RECEIVE = 'BLOG_POST_LIST_RECEIVE';
@@ -36,3 +36,22 @@ export const blogPostAdd = () => ({
         title: 'A newly add blog post'
     }
 })
+
+export const userLoginAttempt = (username, password) => {
+    return (dispatch) => {
+        return axios.post(BASE_URL+'/api/login_check', {username, password})
+            .then(res => {
+                console.log(res.data)
+                dispatch(userLoginSuccess(res.data.token, JSON.stringify(res.data.data)))
+            })
+            .catch(err=>console.log(err))
+    }
+}
+
+export const userLoginSuccess = (token, user) => {
+    return {
+        type: USER_LOGIN_SUCCESS,
+        token,
+        user
+    }
+}
