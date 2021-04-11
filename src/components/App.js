@@ -6,6 +6,7 @@ import Header from "./Header";
 import BlogDetail from "./BlogDetail";
 import axios from "axios";
 
+
 class App extends React.Component{
     constructor(props) {
         super(props);
@@ -14,7 +15,6 @@ class App extends React.Component{
             axios.defaults.headers.common['Authorization'] = 'Bearer ' + token
         }
     }
-
     render(){
         return (
             <div>
