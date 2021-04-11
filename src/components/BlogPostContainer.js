@@ -12,7 +12,7 @@ class BlogPostContainer extends Component {
     }
 
     render() {
-        console.log(BASE_URL)
+        console.log(this.props.posts)
         return (
             <div>
                 <BlogPostList posts={this.props.posts} isFetching={this.props.isFetching}/>

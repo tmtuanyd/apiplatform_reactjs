@@ -3,14 +3,23 @@ import { Field, reduxForm } from 'redux-form'
 import {renderField} from "../form";
 import {connect} from "react-redux";
 import {userLoginAttempt} from "../actions/action";
+import {withRouter} from "react-router";
+import {compose} from "redux";
 
 class LoginForm extends Component {
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        if (prevProps.token !== this.props.token){
+            this.props.history.push('/')
+        }
+    }
+
     onSubmit = (values) => {
         this.props.userLoginAttempt(values.username, values.password)
     }
     render() {
         console.log(this.props)
-        const { handleSubmit } = this.props
+        const { handleSubmit, error } = this.props
+        console.log(error)
         return (
             <div>
                 <form action="" onSubmit={handleSubmit(this.onSubmit)}>
@@ -23,10 +32,14 @@ class LoginForm extends Component {
     }
 }
 
+const mapStateToProps = state => ({
+    ...state.auth
+})
+
 const mapDispatchToProps = {
     userLoginAttempt
 }
 
 export default reduxForm({
     form: 'loginForm'
-})(connect(null, mapDispatchToProps)(LoginForm));
+})(compose(connect(mapStateToProps, mapDispatchToProps), withRouter)(LoginForm));
